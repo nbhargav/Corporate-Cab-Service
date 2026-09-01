@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Corporate Cab Service</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; margin: 0; background: #f5f6fa; }
+        header { background: #1a2634; color: white; padding: 15px 30px; }
+        header a { color: white; margin-right: 15px; text-decoration: none; }
+        main { padding: 30px; max-width: 900px; margin: 0 auto; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+        .btn { padding: 6px 14px; background: #2d6cdf; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .status-Pending { color: #b8860b; }
+        .status-Approved { color: #2d8f2d; }
+        .status-Rejected { color: #c0392b; }
+    </style>
+</head>
+<body>
+    <header>
+        <strong>Corporate Cab Service</strong>
+        <nav style="float:right;">
+            <a href="/Account/Logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

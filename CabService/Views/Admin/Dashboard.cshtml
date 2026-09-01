@@ -1,0 +1,52 @@
+@model List<CabService.Models.VehicleRequest>
+
+<h2>Pending Vehicle Requests</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Purpose</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Assign Vehicle</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var req in Model)
+    {
+        <tr>
+            <td>@req.Employee?.FullName</td>
+            <td>@req.Purpose</td>
+            <td>@req.RequiredFrom.ToString("g")</td>
+            <td>@req.RequiredTo.ToString("g")</td>
+            <td>
+                <form method="post" asp-action="AssignVehicle" style="display:flex; gap:6px;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="requestId" value="@req.RequestId" />
+                    <select name="vehicleId">
+                        @foreach (var v in (List<CabService.Models.Vehicle>)ViewBag.AvailableVehicles)
+                        {
+                            <option value="@v.VehicleId">@v.RegistrationNumber (@v.Make @v.Model)</option>
+                        }
+                    </select>
+                    <button class="btn" type="submit">Assign</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" asp-action="RejectRequest">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="requestId" value="@req.RequestId" />
+                    <button class="btn" style="background:#c0392b;" type="submit">Reject</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p style="margin-top:20px;">
+    <a asp-action="FuelReport">View Fuel Report</a> |
+    <a asp-action="FeedbackReport">View Feedback Report</a>
+</p>
